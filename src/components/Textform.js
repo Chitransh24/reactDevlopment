@@ -12,6 +12,17 @@ export default function Textform(props) {
   const toLowerCase = () => {
     setText(text.toLowerCase());
   };
+  const clearCase = () => {
+    let texty = '';
+    setText(texty);
+  };
+  const capitalized = () => {
+    var str='';
+    str+={text};
+    str.charAt(0).toUpperCase();
+    setText(str);
+  };
+  
   const [text, setText] = useState("");
   let time = (text.split(" ").length -1) * 0.008;
   time = Math.ceil(time);
@@ -36,6 +47,12 @@ export default function Textform(props) {
         </button>
         <button className="btn btn-primary mx-2" onClick={toLowerCase}>
           To Lowercase
+        </button>
+        <button className="btn btn-primary mx-2" onClick={clearCase}>
+          Clear
+        </button>
+        <button className="btn btn-primary mx-2" onClick={capitalized}>
+        Capitalized
         </button>
       </div>
       <div className="container my-3 ">
