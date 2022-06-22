@@ -77,23 +77,29 @@ export default function Navbar(props) {
             </li>
           </ul>
         </div>
-        <div class="btn-group mx-4" role="group" aria-label="Basic example">
+        {/* <div class="btn-group mx-4" role="group" aria-label="Basic example">
           <button type="button"onClick={props.toggleRed}  class="btn csbtnred ">Reddish Dark mode</button>
           <button type="button"onClick={props.toggleMode} class="btn csbtngreen">Greenish Dark mode</button>
           <button type="button"onClick={props.toggleMode} class="btn csbtnblue">Bluish Dark mode</button>
-        </div>
+        </div> */}
         <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}`}>
           <input
             className="form-check-input"
             type="checkbox" 
-            onClick={props.toggleMode}
+            onClick={() => {props.toggleMode('dark')}}
             role="switch"
             id="flexSwitchCheckDefault"
+            style={{cursor:'pointer'}}
           />
           <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
             Enable Dark mode
           </label>
         </div>
+        <div className="bg-primary rounded mx-2" onClick={props.toggleBlue} style={{height:"30px", width:"30px", border:'1px solid white', cursor:'pointer'}}></div>
+        <div className="bg-success rounded mx-2" onClick={props.toggleGreen} style={{height:"30px", width:"30px" ,border:'1px solid white', cursor:'pointer'}}></div>
+        <div className="bg-danger rounded mx-2" onClick={props.toggleRed} style={{height:"30px", width:"30px", border:'1px solid white', cursor:'pointer'}}></div>
+        {/* <div className="bg-dark rounded mx-2" onClick= { () => {props.toggleMode('primary')}} style={{height:"30px", width:"30px", border:'1px solid white'}}></div> */}
+
       </div>
     </nav>
   );
