@@ -8,25 +8,29 @@ export default function Textform(props) {
   const toUpperCase = () => {
     console.log("Uppercase Was Clicked");
     setText(text.toUpperCase());
+    props.showAlert("Converted to UpperCase.", "success");
   };
   const toLowerCase = () => {
     setText(text.toLowerCase());
+    props.showAlert("Converted to LowerCase.", "success");
   };
   const clearCase = () => {
     let texty = '';
     setText(texty);
+    props.showAlert("Text area has been Cleared.", "success");
   };
   const copyText = () => {
     var copy =document.getElementById("exampleFormControlTextarea1");
     copy.select();
     navigator.clipboard.writeText(copy.value);
 
-  console.log("hello");
+    props.showAlert("Copied to Clipboard.", "success");
     
   };
   const removeWhiteSpace = ()=>{
     let newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Whitespaces has been removed.", "success");
   }
   
   const [text, setText] = useState("");
