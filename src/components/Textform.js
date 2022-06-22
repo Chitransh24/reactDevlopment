@@ -16,19 +16,25 @@ export default function Textform(props) {
     let texty = '';
     setText(texty);
   };
-  const capitalized = () => {
-    var str='';
-    str+={text};
-    str.charAt(0).toUpperCase();
-    setText(str);
+  const copyText = () => {
+    var copy =document.getElementById("exampleFormControlTextarea1");
+    copy.select();
+    navigator.clipboard.writeText(copy.value);
+
+  console.log("hello");
+    
   };
+  const removeWhiteSpace = ()=>{
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  }
   
   const [text, setText] = useState("");
   let time = (text.split(" ").length -1) * 0.008;
   time = Math.ceil(time);
   return (
     <>
-      <div className="container">
+      <div className="container" style={{color: props.mode==='light'?'black':'white'}}>
         <div>
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             {props.text}
@@ -38,7 +44,8 @@ export default function Textform(props) {
             id="exampleFormControlTextarea1"
             value={text}
             onChange={onChanged}
-            rows="6"
+            rows="6" 
+            style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='light'?'black':'white'}}
           ></textarea>
         </div>
         <br />
@@ -51,11 +58,14 @@ export default function Textform(props) {
         <button className="btn btn-primary mx-2" onClick={clearCase}>
           Clear
         </button>
-        <button className="btn btn-primary mx-2" onClick={capitalized}>
-        Capitalized
+        <button className="btn btn-primary mx-2" onClick={copyText}>
+        Copy Text
+        </button>
+        <button className="btn btn-primary mx-2" onClick={removeWhiteSpace}>
+        Remove Whitespaces
         </button>
       </div>
-      <div className="container my-3 ">
+      <div className="container my-3" style={{color: props.mode==='light'?'black':'white'}}>
         <h1>Your Text Summary.</h1>
         <p>
           The number of Characters you've written = {text.length} & number of
@@ -63,6 +73,10 @@ export default function Textform(props) {
         </p>
         <p>
             Minimum amount of time to read this = {time} Minutes
+        </p>
+        <h1>Preview</h1>
+        <p>
+          {text.length>0 ? text: "Enter the text in the above Text Area to preview your text here."}
         </p>
       </div>
     </>
