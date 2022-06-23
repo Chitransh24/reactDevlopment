@@ -49,7 +49,7 @@ export default function Textform(props) {
             value={text}
             onChange={onChanged}
             rows="6" 
-            style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='light'?'black':'white'}}
+            style={{backgroundColor: props.mode==='dark'?'primary':'white', color: props.mode==='light'?'black':'white'}}
           ></textarea>
         </div>
         <br />

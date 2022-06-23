@@ -21,7 +21,9 @@ function App() {
     if (mode === "light") {
       removeClasses();
       document.body.classList.add("bg-"+cls);
-        
+      setInterval(() => {
+        document.title = "Text Utility"
+      }, 2000);
       showAlert("Dark mode has been Enabled.", "success");
       setMode("dark");
     }                                          
