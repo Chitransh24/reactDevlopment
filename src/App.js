@@ -3,7 +3,13 @@ import { useState } from "react";
 import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import Textform from "./components/Textform";
+import About from "./components/About";
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 function App() {
   const [mode, setMode] = useState("light");
   const [customColor , setCustomColor] = useState("light");
@@ -20,7 +26,7 @@ function App() {
   const toggleMode = (cls) => {
     if (mode === "light") {
       removeClasses();
-      document.body.classList.add("bg-"+cls);
+      document.body.style.backgroundColor = '#042743';
       setInterval(() => {
         document.title = "Text Utility"
       }, 2000);
@@ -83,6 +89,7 @@ function App() {
   }
   return (
     <>
+        <Router>
       <Navbar
         title="TextUtility"
         dropdown="Dropdown Menu"
@@ -92,8 +99,15 @@ function App() {
         toggleBlue={toggleBlue}
         toggleGreen={toggleGreen}
       />
-      <Alert alert= {alert}/>
-      <Textform heading="Enter Your text" text="Enter Text to analyze" showAlert = {showAlert} mode= {mode} />
+      <Alert alert= {alert} />
+      <Routes>
+         
+         <Route exact path="/" element= {<Textform heading="Enter Your text" text="Enter Text to analyze" showAlert = {showAlert} mode= {mode} />} />
+         
+         <Route exact path="/about" element={<About mode= {mode} />}  /> 
+
+       </Routes>
+        </Router>
       {/* <About/> */}
     </>
   );

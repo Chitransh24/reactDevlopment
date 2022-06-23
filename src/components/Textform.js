@@ -23,7 +23,7 @@ export default function Textform(props) {
     var copy =document.getElementById("exampleFormControlTextarea1");
     copy.select();
     navigator.clipboard.writeText(copy.value);
-
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied to Clipboard.", "success");
     
   };
@@ -34,11 +34,11 @@ export default function Textform(props) {
   }
   
   const [text, setText] = useState("");
-  let time = (text.split(" ").length -1) * 0.008;
-  time = Math.ceil(time);
+  let time = (text.split(" ").filter((element)=>{return element.length!==0}).length) * 0.008;
+  // time = Math.ceil(time);
   return (
     <>
-      <div className="container" style={{color: props.mode==='light'?'black':'white'}}>
+      <div className="container" style={{color: props.mode==='light'?'#042743':'white'}}>
         <div>
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             {props.text}
@@ -49,31 +49,31 @@ export default function Textform(props) {
             value={text}
             onChange={onChanged}
             rows="6" 
-            style={{backgroundColor: props.mode==='dark'?'primary':'white', color: props.mode==='light'?'black':'white'}}
+            style={{backgroundColor: props.mode==='dark'?'#13466e':'white', color: props.mode==='light'?'black':'white'}}
           ></textarea>
         </div>
         <br />
-        <button className="btn btn-info mx-1" onClick={toUpperCase}>
+        <button disabled = {text.length<=0}  className="btn btn-info mx-2" onClick={toUpperCase}>
           To Uppercase
         </button>
-        <button className="btn btn-info mx-2" onClick={toLowerCase}>
+        <button disabled = {text.length<=0} className="btn btn-info mx-2" onClick={toLowerCase}>
           To Lowercase
         </button>
-        <button className="btn btn-info mx-2" onClick={clearCase}>
+        <button disabled = {text.length<=0} className="btn btn-info mx-2" onClick={clearCase}>
           Clear
         </button>
-        <button className="btn btn-info mx-2" onClick={copyText}>
+        <button disabled = {text.length<=0} className="btn btn-info mx-2" onClick={copyText}>
         Copy Text
         </button>
-        <button className="btn btn-info mx-2" onClick={removeWhiteSpace}>
+        <button disabled = {text.length<=0} className="btn btn-info mx-2" onClick={removeWhiteSpace}>
         Remove Whitespaces
         </button>
       </div>
-      <div className="container my-3" style={{color: props.mode==='light'?'black':'white'}}>
+      <div className="container my-3" style={{color: props.mode==='light'?'#042743':'white'}}>
         <h1>Your Text Summary.</h1>
         <p>
           The number of Characters you've written = {text.length} & number of
-          Words that you'vee written = {text.split(" ").length - 1}
+          Words that you'vee written = {text.split(" ").filter((element)=>{return element.length!==0}).length }
         </p>
         <p>
             Minimum amount of time to read this = {time} Minutes
